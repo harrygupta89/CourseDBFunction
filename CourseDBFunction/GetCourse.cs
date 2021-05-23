@@ -19,10 +19,8 @@ namespace CourseDBFunction
             [HttpTrigger(AuthorizationLevel.Function, "get", Route = null)] HttpRequest req,
             ILogger log)
         {
-
             List<Course> _lst = new List<Course>();
-            string _connection_string = "Server=tcp:dbserver100089.database.windows.net,1433;Initial Catalog=appdb;Persist Security Info=False;" +
-                "User ID=demouser;Password=password@123;MultipleActiveResultSets=False;Encrypt=True;TrustServerCertificate=False;Connection Timeout=30;";
+            string _connection_string = Environment.GetEnvironmentVariable("SQLAZURECONNSTR_SQLConnectionString");
             string _statement = "select CourseID, CourseName, Rating from Course";
             SqlConnection _connection = new SqlConnection(_connection_string);
             _connection.Open();
